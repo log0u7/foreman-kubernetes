@@ -18,6 +18,11 @@ foreman:
   secretKeyBaseSecretKey: SECRET_KEY_BASE
   seedAdminUserSecretKey: SEED_ADMIN_USER
   seedAdminPasswordSecretKey: SEED_ADMIN_PASSWORD
+  # Non-secret seed identity knobs consumed by db:seed in the migration Job.
+  # Empty values are omitted; the seeds then fall back to upstream defaults.
+  seedAdminEmail: ""
+  seedOrganization: ""
+  seedLocation: ""
   database:
     sslMode: disable
   puma:

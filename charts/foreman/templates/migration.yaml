@@ -59,6 +59,18 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.foreman.existingSecret }}
                   key: {{ .Values.foreman.seedAdminPasswordSecretKey }}
+            {{- if .Values.foreman.seedAdminEmail }}
+            - name: SEED_ADMIN_EMAIL
+              value: {{ .Values.foreman.seedAdminEmail | quote }}
+            {{- end }}
+            {{- if .Values.foreman.seedOrganization }}
+            - name: SEED_ORGANIZATION
+              value: {{ .Values.foreman.seedOrganization | quote }}
+            {{- end }}
+            {{- if .Values.foreman.seedLocation }}
+            - name: SEED_LOCATION
+              value: {{ .Values.foreman.seedLocation | quote }}
+            {{- end }}
           volumeMounts:
             {{- include "foreman.migrationVolumeMounts" . | nindent 12 }}
           resources:
