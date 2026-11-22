@@ -10,7 +10,7 @@ on:
     inputs:
       image_repository:
         description: Image repository to test
-        default: ghcr.io/log0u7/foreman/foreman
+        default: ghcr.io/log0u7/foreman
       image_tag:
         description: Image tag to test
         required: true
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     env:
-      HELM_IMAGE_REPOSITORY: ${{ inputs.image_repository || 'ghcr.io/log0u7/foreman/foreman' }}
+      HELM_IMAGE_REPOSITORY: ${{ inputs.image_repository || 'ghcr.io/log0u7/foreman' }}
       HELM_IMAGE_TAG: ${{ inputs.image_tag || 'latest' }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
