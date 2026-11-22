@@ -61,6 +61,11 @@ diagnostics)
 	kubectl --context "${context}" --namespace "${namespace}" get events --sort-by=.lastTimestamp
 	kubectl --context "${context}" --namespace "${namespace}" logs \
 		--selector "app.kubernetes.io/instance=${release}" --all-containers --tail=100 --prefix
+	# Job pods are deleted on completion: their container logs must be
+	# captured from the remaining Job object while it still exists.
+	for job in $(kubectl --context "${context}" --namespace "${namespace}" get jobs -o name); do
+		kubectl --context "${context}" --namespace "${namespace}" logs "${job}" --all-containers --tail=200 --prefix || true
+	done
 	;;
 teardown)
 	if [[ -f "${ownership_file}" ]]; then
